@@ -39,7 +39,7 @@ drawLine = True
 
 def draw():
     global x, px, py, angle, lisRadius, drawLine, cycles, colors, lobes
-    translate(width/2, height/2) #set coordinates to center of window
+    translate(width/2, height/2) #Set coordinates to center of window
     
     x1, y1 = xy(angle, lisRadius, lobes) #Polar to Rectangular conversion
     line(px, py, x1, y1) #Plot line from previous point to current point
@@ -51,7 +51,7 @@ def draw():
         drawLine = not drawLine
         if not drawLine:
             stroke(0, 0, 0)
-        else:   #If done erasing, change colore and start drawing
+        else:   #If done erasing, change color and start drawing
             stroke(colors[cycles % len(colors)][0],
                    colors[cycles % len(colors)][1],
                    colors[cycles % len(colors)][2])
