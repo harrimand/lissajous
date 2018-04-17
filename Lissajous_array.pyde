@@ -16,15 +16,15 @@ def settings():
     fullScreen()
 
 lobes = 199
-segLength = 25
+segLength = 50
 
 colors = [[0, 0, 0],       #Black
           [255, 128, 255], #Magenta
+          [131, 220, 255], #Blue
           [255, 100, 120], #Red
           [255, 255, 64],  #Yellow
           [137, 255, 60],  #Green
           [255, 160, 60],  #Orange
-          [131, 220, 255], #Blue
           [255, 255, 255]  #White
           ]
 
@@ -47,7 +47,6 @@ def setup():
     global lobes, lP
     lobes = lobes if lobes % 2 == 1 else lobes * 2
     background(0)
-    stroke(colors[3][0], colors[3][1], colors[3][2])
     lP = lis(lobes)
 
 def draw():
@@ -56,18 +55,19 @@ def draw():
     
     if erase:
         stroke(0, 0, 0)
-        strokeWeight(2)
+        strokeWeight(3)
     else:
         stroke(colors[cS][0], colors[cS][1], colors[cS][2])
-        strokeWeight(1)
+        strokeWeight(2)
     
     for i in range(segment, segment + segLength):
         if i < len(lP):
             line(lP[i][0], lP[i][1], lP[(i + 1)%len(lP)][0], lP[(i + 1)%len(lP)][1])
         else:
             erase = ~erase
-            cS = (cS + 1) % (len(colors) - 1) + 1 if erase else cS
+            if ~erase:
+                cS = cS + 1 if cS < (len(colors) - 1) else 1 
+                print(cS, end=" ")
             segment = -segLength
             break
     segment += segLength
-
